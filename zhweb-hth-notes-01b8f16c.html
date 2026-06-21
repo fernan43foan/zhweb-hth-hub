@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>华体会 · 信息概览</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #f0f2f5;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #1e2a3a;
+            line-height: 1.65;
+            padding: 2rem 1.5rem 3rem;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* 顶部导航 */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.9rem 1.8rem;
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.03);
+            border: 1px solid #e3e7ed;
+            margin-bottom: 2.6rem;
+            flex-wrap: wrap;
+            gap: 0.6rem 1rem;
+        }
+        .brand {
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: 0.4px;
+            color: #0b2b44;
+        }
+        .brand span {
+            color: #4f7da3;
+            margin-left: 5px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.95rem;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3f57;
+            padding: 0.2rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .nav-links a:hover {
+            border-bottom-color: #6e92b4;
+            color: #0b2b44;
+        }
+        .nav-links a.active {
+            border-bottom-color: #4f7da3;
+            color: #1a3147;
+            font-weight: 500;
+        }
+
+        /* hero 区 */
+        .hero {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2.8rem 2.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+            border: 1px solid #e7ebf1;
+            margin-bottom: 2.4rem;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+            color: #0b2b44;
+            margin-bottom: 0.9rem;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 1.05rem;
+            max-width: 760px;
+            color: #334b5e;
+        }
+
+        /* 卡片网格 (三个场景模块) */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            margin-bottom: 2.6rem;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.8rem 1.5rem 2rem;
+            border: 1px solid #e3e9f0;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+            transition: box-shadow 0.2s, transform 0.1s;
+        }
+        .card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+            transform: translateY(-2px);
+        }
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #1b3349;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card h3 i {
+            font-style: normal;
+            background: #edf2f8;
+            border-radius: 30px;
+            padding: 0 10px;
+            font-size: 0.85rem;
+            color: #3f617f;
+        }
+        .card p {
+            color: #2d455b;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+        .card .meta-tag {
+            display: inline-block;
+            background: #edf2f8;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #3b5a77;
+            margin-top: 0.6rem;
+            border: 1px solid #dbe2ec;
+        }
+
+        /* 常见说明 + 引用区域 */
+        .info-section {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2.2rem 2.2rem;
+            border: 1px solid #e3e9f0;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+            margin-bottom: 2.2rem;
+        }
+        .info-section h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #0b2b44;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.3px;
+        }
+        .faq-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 2rem;
+        }
+        .faq-item {
+            flex: 1 1 240px;
+        }
+        .faq-item strong {
+            display: block;
+            font-weight: 600;
+            color: #1d364b;
+            margin-bottom: 0.2rem;
+            font-size: 0.95rem;
+        }
+        .faq-item p {
+            color: #3d5770;
+            font-size: 0.9rem;
+        }
+        .inline-link-wrap {
+            margin-top: 1.4rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #e9eef4;
+            font-size: 0.95rem;
+            color: #2f4860;
+        }
+
+        /* 延伸阅读 区块 */
+        .extra-block {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.5rem 2rem 1.8rem;
+            border: 1px solid #e3e9f0;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+            margin-bottom: 2.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .extra-block p {
+            color: #2d455b;
+            max-width: 640px;
+            font-size: 0.95rem;
+        }
+        .extra-block .ref-badge {
+            background: #eef3f9;
+            border-radius: 40px;
+            padding: 0.4rem 1.5rem;
+            border: 1px solid #d4dee9;
+            font-size: 0.8rem;
+            color: #305472;
+            white-space: nowrap;
+        }
+
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            color: #657e97;
+            font-size: 0.8rem;
+            padding: 1.8rem 1rem 0.5rem;
+            border-top: 1px solid #dce3ec;
+            margin-top: 0.8rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 850px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+        @media (max-width: 600px) {
+            body { padding: 1.2rem 1rem 2rem; }
+            .top-nav { flex-direction: column; align-items: flex-start; padding: 0.8rem 1.2rem; }
+            .nav-links { gap: 1rem; flex-wrap: wrap; }
+            .hero { padding: 1.8rem 1.5rem; }
+            .hero h1 { font-size: 1.5rem; }
+            .cards-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+            .info-section { padding: 1.5rem; }
+            .extra-block { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- 顶部导航 -->
+    <nav class="top-nav">
+        <div class="brand">概述<span>· 查询对照</span></div>
+        <div class="nav-links">
+            <a href="#" class="active">概览</a>
+            <a href="#">场景</a>
+            <a href="#">说明</a>
+            <a href="#">参考</a>
+        </div>
+    </nav>
+
+    <!-- hero 核心介绍 -->
+    <div class="hero">
+        <h1>华体会 · 日常信息索引</h1>
+        <p>围绕常见查询、对比与延伸阅读，提供轻量级结构化参考。从基础介绍到三组典型应用场景，以及常见说明，便于快速建立整体认知。本页内容基于公开资料与通用知识整理，可作为初始检索的出发点。</p>
+    </div>
+
+    <!-- 三个场景模块 -->
+    <div class="cards-grid">
+        <div class="card">
+            <h3>日常查询 <i>对比</i></h3>
+            <p>在获取信息时，常需要横向对照不同来源的表述与数据。华体会提供了一种整合式的查询视角，帮助减少反复跳转，提高信息筛选效率。</p>
+            <span class="meta-tag">检索 · 对照</span>
+        </div>
+        <div class="card">
+            <h3>场景对照 <i>应用</i></h3>
+            <p>将概念与实际使用场景进行对照，有助于理解其适用范围。例如在技术选型、文档查阅或功能对比时，可借助华体会的归纳快速定位关键差异。</p>
+            <span class="meta-tag">场景 · 适配</span>
+        </div>
+        <div class="card">
+            <h3>延伸阅读 <i>参考</i></h3>
+            <p>单一信息源往往不够充分。通过延伸阅读和关联条目，可以在华体会的基础上进一步探索相关主题，形成更完整的知识链条。</p>
+            <span class="meta-tag">扩展 · 串联</span>
+        </div>
+    </div>
+
+    <!-- 常见说明 + FAQ 摘要 -->
+    <div class="info-section">
+        <h2>常见说明与要点</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <strong>信息定位</strong>
+                <p>内容侧重日常查询与对照，不构成专业建议，使用时请结合多方验证。</p>
+            </div>
+            <div class="faq-item">
+                <strong>覆盖范围</strong>
+                <p>归纳通用框架与典型场景，具体细节可能因环境差异而不同。</p>
+            </div>
+            <div class="faq-item">
+                <strong>更新节奏</strong>
+                <p>根据通用知识库定期调整，保持与常用参考源一致。</p>
+            </div>
+        </div>
+        <!-- 自然嵌入链接的句子 -->
+        <div class="inline-link-wrap">
+            如需进一步了解整体介绍与资源索引，可参考 <a href="https://zhweb--hth.com">华体会</a> 的概览页面。该页面整合了更多查询与对照素材，适合作为延伸阅读的起点。
+        </div>
+    </div>
+
+    <!-- 延伸阅读 区块 (差异化) -->
+    <div class="extra-block">
+        <p><strong>延伸阅读建议：</strong> 在查阅具体条目时，建议同时打开相关参考页面进行横向对比。华体会的模块化结构有助于快速切换视角，提升信息整合效率。</p>
+        <span class="ref-badge">对照参考 · 2025</span>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer">
+        内容索引 · 日常查询与对照 &nbsp;|&nbsp; 基于公开知识整理
+    </div>
+
+</div>
+</body>
+</html>

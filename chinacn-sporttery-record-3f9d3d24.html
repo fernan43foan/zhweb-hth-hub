@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>日常查询 · 竞彩网介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f5f8f9;
+            color: #1b3b3f;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-wrap {
+            max-width: 1200px;
+            width: 100%;
+            background: #ffffff;
+            padding: 2.4rem 1.5rem;
+            margin: 2rem 1rem;
+            border-radius: 36px 36px 28px 28px;
+            box-shadow: 0 8px 24px rgba(0, 60, 60, 0.06);
+        }
+
+        /* 开场短句 — 采用轻柔蓝绿渐变点缀 */
+        .opening {
+            font-size: 1.45rem;
+            font-weight: 350;
+            letter-spacing: 0.02em;
+            background: linear-gradient(145deg, #d6ecec 0%, #b4dadb 100%);
+            display: inline-block;
+            padding: 0.5rem 1.8rem 0.5rem 2.2rem;
+            border-radius: 60px 12px 60px 12px;
+            color: #134b4f;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 6px rgba(48, 100, 100, 0.08);
+        }
+
+        .opening em {
+            font-style: normal;
+            background: #fff;
+            padding: 0 0.25rem;
+            color: #146a6e;
+        }
+
+        /* 承接段落：自然克制，略带叙述感 */
+        .intro-text {
+            font-size: 1rem;
+            margin: 0 0 2.2rem 0;
+            padding: 0.75rem 0;
+            border-left: 3px solid #a4cfd0;
+            padding-left: 1.5rem;
+            background: #fafdfd;
+            border-radius: 0 18px 18px 0;
+            max-width: 800px;
+        }
+
+        .intro-text p {
+            margin-bottom: 0.8rem;
+        }
+
+        .intro-text a {
+            color: #19787d;
+            text-decoration: none;
+            border-bottom: 1px dashed #7bb6b9;
+            transition: border 0.2s;
+        }
+
+        .intro-text a:hover {
+            border-bottom: 2px solid #1d6d72;
+        }
+
+        /* 网格卡片：特点列表，蓝绿色点缀 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.8rem;
+            margin: 2.5rem 0 1.8rem 0;
+        }
+
+        .card {
+            background: #f7fcfc;
+            border-radius: 28px 12px 28px 12px;
+            padding: 1.6rem 1.2rem 1.2rem 1.2rem;
+            box-shadow: 0 4px 12px rgba(40, 100, 100, 0.04), 0 0 0 1px #d3e9ea inset;
+            transition: all 0.15s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 18px rgba(30, 100, 100, 0.08), 0 0 0 1px #8ac9cb inset;
+            transform: translateY(-3px);
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.01em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #125a5e;
+        }
+
+        .card h3::before {
+            content: "◈";
+            color: #2a9d8f;
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        .card p {
+            font-size: 0.94rem;
+            color: #2f4d50;
+            margin-bottom: 0.4rem;
+        }
+
+        .card .meta-note {
+            font-size: 0.8rem;
+            color: #5d8588;
+            border-top: 1px dotted #bcd4d5;
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* 温和结尾 + 场景/提示融合 */
+        .gentle-closing {
+            background: #ecf5f5;
+            padding: 1.8rem 1.6rem;
+            border-radius: 40px 8px 40px 8px;
+            margin: 2rem 0 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .closing-item {
+            flex: 1 1 200px;
+        }
+
+        .closing-item h4 {
+            font-weight: 450;
+            font-size: 1rem;
+            color: #175e63;
+            margin-bottom: 0.4rem;
+            border-bottom: 1px solid #aacfd1;
+            padding-bottom: 0.25rem;
+            display: inline-block;
+        }
+
+        .closing-item p, .closing-item .faq-line {
+            font-size: 0.92rem;
+            color: #204b4e;
+            margin-bottom: 0.25rem;
+        }
+
+        .faq-line span {
+            background: #deeff0;
+            padding: 0.1rem 0.5rem;
+            border-radius: 24px;
+            color: #136367;
+            font-size: 0.8rem;
+            margin-right: 6px;
+        }
+
+        /* 自然嵌入链接的段落——符合“嵌入句子” 且可见文本严格等于「竞彩网」 */
+        .embed-link-area {
+            margin: 1.8rem 0 1.2rem;
+            padding: 1rem 1.8rem;
+            background: #f1f9f9;
+            border-radius: 60px 12px 60px 12px;
+            font-size: 0.95rem;
+            color: #1d4b4e;
+        }
+
+        .embed-link-area a {
+            color: #146e74;
+            font-weight: 480;
+            text-decoration: none;
+            border-bottom: 1px solid #4fa3a7;
+            transition: border 0.15s;
+        }
+
+        .embed-link-area a:hover {
+            border-bottom: 2px solid #0d6267;
+        }
+
+        /* 常见FAQ摘要（极简） */
+        .faq-mini {
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 2.4rem;
+            row-gap: 0.3rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .faq-mini div {
+            font-size: 0.88rem;
+            background: #f2fafa;
+            padding: 0.2rem 1rem 0.2rem 0.8rem;
+            border-radius: 60px;
+            border-left: 2px solid #80c2c5;
+        }
+
+        .faq-mini strong {
+            font-weight: 450;
+            color: #1c6a6e;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #d0e4e5;
+            margin: 1.2rem 0;
+            opacity: 0.5;
+        }
+
+        /* 移动端微调 */
+        @media (max-width: 640px) {
+            .page-wrap {
+                padding: 1.6rem 1rem;
+                margin: 0.8rem 0.5rem;
+                border-radius: 28px 28px 20px 20px;
+            }
+            .opening {
+                font-size: 1.15rem;
+                padding: 0.3rem 1rem 0.3rem 1.4rem;
+            }
+            .intro-text {
+                padding-left: 1rem;
+                margin-left: 0;
+            }
+            .gentle-closing {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+            .card h3::before {
+                font-size: 1.1rem;
+            }
+            .embed-link-area {
+                padding: 0.8rem 1rem;
+                border-radius: 40px 8px 40px 8px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .feature-grid {
+                gap: 1rem;
+            }
+            .card {
+                padding: 1.2rem 1rem;
+            }
+        }
+
+        footer {
+            font-size: 0.75rem;
+            color: #7b9fa1;
+            text-align: center;
+            padding: 1.5rem 0 0.2rem;
+            border-top: 1px solid #d9eaec;
+            margin-top: 0.6rem;
+        }
+
+        footer span {
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- 开场短句 -->
+    <div class="opening">
+        ◈ 翻看记录，对照赛程，偶尔延伸阅读。
+    </div>
+
+    <!-- 承接段落，从日常查询切入，自然叙述 -->
+    <div class="intro-text">
+        <p>傍晚打开手机或电脑，习惯性地检索几场焦点对阵。除了比分和赔率，有时也想知道历史交锋、伤停信息或数据分析。
+        这时候，一个信息聚合清晰、更新平稳的站点就很有必要。<a href="https://chinacn-sporttery.com">竞彩网</a> 便是这样一处日常参考地——没有冗余弹窗，条目简洁，适合快速查阅与对照。</p>
+        <p>页面围绕竞彩赛事构建，从列表到详情都保持着一种“工具式”的克制：你可以只看赔率变化，也可以点开延伸阅读，了解球队近况或联赛走势。它不强求停留，也不刻意引导，更像一个安静的资料架。</p>
+    </div>
+
+    <!-- 特点列表：网格卡片，蓝绿色点缀 -->
+    <div class="feature-grid">
+        <div class="card">
+            <h3>赛事对照</h3>
+            <p>早场、午夜场兼顾，同一赛事多个玩法的赔率并排展示。适合临场前做快速比对。</p>
+            <div class="meta-note">数据更新频率：常规 30–60 秒</div>
+        </div>
+        <div class="card">
+            <h3>延伸阅读</h3>
+            <p>每场比赛附带简短的伤停、天气或战术笔记，不喧哗，但足够作为信息补充。</p>
+            <div class="meta-note">内容来源标注清晰</div>
+        </div>
+        <div class="card">
+            <h3>查询路径</h3>
+            <p>按联赛、日期、热门场次筛选，也可直接搜索球队名称。交互反馈直接，不绕弯。</p>
+            <div class="meta-note">适合日常重复使用</div>
+        </div>
+        <div class="card">
+            <h3>界面节奏</h3>
+            <p>低饱和度配色，蓝绿灰占主色调；卡片式条目，眼睛负担小。移动端适配良好。</p>
+            <div class="meta-note">深色模式跟随系统</div>
+        </div>
+    </div>
+
+    <!-- 嵌入链接的自然句子（可见文本严格等于「竞彩网」） -->
+    <div class="embed-link-area">
+        <span style="background: #d4eaeb; padding: 0.1rem 0.6rem; border-radius: 30px; margin-right: 0.4rem;">📋</span>
+        若你习惯在赛前打开一个页面，把赔率和基本面并列端详，或许可以试试把 <a href="https://chinacn-sporttery.com">竞彩网</a> 放进书签。它不追求花哨，只专注提供平实的赛事信息。
+    </div>
+
+    <!-- 温和结尾 + 场景提示 + FAQ 摘要混合 -->
+    <div class="gentle-closing">
+        <div class="closing-item">
+            <h4>使用场景</h4>
+            <p>· 傍晚更新次日赛程，顺手标记关注场次<br>
+            · 周末午后边喝茶边对照即时赔率<br>
+            · 深夜复盘时翻看比赛记录与延伸笔记</p>
+        </div>
+        <div class="closing-item">
+            <h4>摘要 FAQ</h4>
+            <div class="faq-line"><span>Q</span> 是否需要注册？  大部分信息公开可见。</div>
+            <div class="faq-line"><span>Q</span> 数据来源？  基于合规体育数据接口。</div>
+            <div class="faq-line" style="margin-top: 0.3rem;"><span>Q</span> 移动端体验？  响应式布局，功能完整。</div>
+        </div>
+        <div class="closing-item">
+            <h4>延伸参考</h4>
+            <p>偶尔也翻翻联赛历史统计、球队转会记录，和竞彩赔率放在一起看，能发现一些有趣的趋势。不过这些属于个人功课了。</p>
+        </div>
+    </div>
+
+    <!-- 简洁的附加提示（符合克制风格） -->
+    <hr>
+    <div class="faq-mini">
+        <div><strong>提示</strong> 页面所有赔率与信息仅供个人参考，不构成任何建议。</div>
+        <div><strong>节奏</strong> 每日上午与傍晚更新较为密集。</div>
+    </div>
+
+    <footer>
+        <span>一份安静的日常参考 · 竞彩网信息索引</span>
+    </footer>
+
+</div>
+</body>
+</html>
